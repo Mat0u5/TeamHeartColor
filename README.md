@@ -1,0 +1,1 @@
+This mod automatically changes your heart color to your team color.

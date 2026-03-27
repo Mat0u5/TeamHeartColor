@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "teamhearts",
+	"version": "${version}",
+	"name": "Team Heart Color",
+	"description": "Automatically changes your heart color to your team color.",
+	"authors": [
+		"Mat0u5"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/Mat0u5/FabricModTemplate"
+	},
+	"license": "MIT",
+	"icon": "assets/teamhearts/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.mat0u5.teamhearts.Main"
+		],
+		"client": [
+			"net.mat0u5.teamhearts.MainClient"
+		]
+	},
+	"mixins": [
+		"teamhearts.mixins.json",
+		{
+			"config": "teamhearts.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "${targetVersion}",
+		"java": ">=${javaVersion}",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
