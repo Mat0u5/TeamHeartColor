@@ -1,0 +1,92 @@
+package net.mat0u5.teamhearts.mixin.client;
+
+import net.mat0u5.teamhearts.ClientUtils;
+import net.mat0u5.teamhearts.IdentifierHelper;
+import net.minecraft.client.gui.Gui;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+import java.util.List;
+import java.util.Locale;
+
+//? if <= 1.21.9 {
+/*import net.minecraft.resources.ResourceLocation;
+*///?} else {
+import net.minecraft.resources.Identifier;
+//?}
+//? if <= 1.21.11 {
+/*import net.minecraft.client.gui.GuiGraphics;
+*///?} else {
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+//?}
+
+//? if >= 1.21.2 && <= 1.21.5 {
+/*import net.minecraft.client.renderer.RenderType;
+import java.util.function.Function;
+*///?}
+//? if >= 1.21.6
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+
+@Mixin(value = Gui.class, priority = 1)
+public class GuiMixin {
+
+    @Unique
+    private static final List<String> th$allowedColors = List.of(
+            "aqua","black","blue","dark_aqua","dark_blue","dark_gray","dark_green",
+            "dark_purple","dark_red","gold","gray","green","light_purple","white","yellow", "red"
+    );
+    @Unique
+    private static final List<String> th$allowedHearts = List.of(
+            "hud/heart/full", "hud/heart/full_blinking", "hud/heart/half", "hud/heart/half_blinking",
+            "hud/heart/hardcore_full", "hud/heart/hardcore_full_blinking", "hud/heart/hardcore_half", "hud/heart/hardcore_half_blinking"
+    );
+
+    //? if <= 1.21 {
+    /*@Redirect(method = "renderHeart", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V"))
+    private void customHearts(GuiGraphics instance, ResourceLocation identifier, int x, int y, int u, int v) {
+    *///?} else if <= 1.21.5 {
+    /*@Redirect(method = "renderHeart", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Ljava/util/function/Function;Lnet/minecraft/resources/ResourceLocation;IIII)V"))
+    private void customHearts(GuiGraphics instance, Function<ResourceLocation, RenderType> renderLayers, ResourceLocation identifier, int x, int y, int u, int v) {
+    *///?} else if <= 1.21.9 {
+    /*@Redirect(method = "renderHeart", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/ResourceLocation;IIII)V"))
+    private void customHearts(GuiGraphics instance, RenderPipeline renderPipeline, ResourceLocation identifier, int x, int y, int u, int v) {
+    *///?} else if <= 1.21.11 {
+    /*@Redirect(method = "renderHeart", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V"))
+    private void customHearts(GuiGraphics instance, RenderPipeline renderPipeline, Identifier identifier, int x, int y, int u, int v) {
+    *///?} else {
+    @Redirect(method = "extractHeart", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V"))
+    private void customHearts(GuiGraphicsExtractor instance, RenderPipeline renderPipeline, Identifier identifier, int x, int y, int u, int v) {
+    //?}
+
+        String texturePath = identifier.getPath();
+        String playerTeamColor = ClientUtils.getPlayerTeamColor();
+        String playerTeamName = ClientUtils.getPlayerTeamName();
+        if (playerTeamColor == null || playerTeamName == null ||
+                !th$allowedColors.contains(playerTeamColor.toLowerCase(Locale.ROOT)) ||
+                !th$allowedHearts.contains(texturePath)) {
+            //? if <= 1.21 {
+            /*instance.blitSprite(identifier, x, y, u, v);
+            *///?} else if <= 1.21.5 {
+            /*instance.blitSprite(renderLayers, identifier, x, y, u, v);
+            *///?} else {
+            instance.blitSprite(renderPipeline, identifier, x, y, u, v);
+            //?}
+            return;
+        }
+
+        String color = playerTeamColor.toLowerCase(Locale.ROOT);
+
+        String heartType = texturePath.replaceFirst("hud/heart/", "");
+
+        var customHeart = IdentifierHelper.mod("textures/gui/hearts/"+color+"_"+heartType+".png");
+        //? if <= 1.21 {
+        /*instance.blit(customHeart, x, y, 100, u, v, u, v, u, v);
+        *///?} else if <= 1.21.5 {
+        /*instance.blit(renderLayers, customHeart, x, y, u, v, u, v, u, v);
+        *///?} else {
+        instance.blit(renderPipeline, customHeart, x, y, u, v, u, v, u, v);
+        //?}
+    }
+}
