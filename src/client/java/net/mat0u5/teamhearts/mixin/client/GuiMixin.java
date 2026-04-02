@@ -32,17 +32,6 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 @Mixin(value = Gui.class, priority = 1)
 public class GuiMixin {
 
-    @Unique
-    private static final List<String> th$allowedColors = List.of(
-            "aqua","black","blue","dark_aqua","dark_blue","dark_gray","dark_green",
-            "dark_purple","dark_red","gold","gray","green","light_purple","white","yellow", "red"
-    );
-    @Unique
-    private static final List<String> th$allowedHearts = List.of(
-            "hud/heart/full", "hud/heart/full_blinking", "hud/heart/half", "hud/heart/half_blinking",
-            "hud/heart/hardcore_full", "hud/heart/hardcore_full_blinking", "hud/heart/hardcore_half", "hud/heart/hardcore_half_blinking"
-    );
-
     //? if <= 1.21 {
     /*@Redirect(method = "renderHeart", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V"))
     private void customHearts(GuiGraphics instance, ResourceLocation identifier, int x, int y, int u, int v) {
@@ -64,8 +53,8 @@ public class GuiMixin {
         String playerTeamColor = ClientUtils.getPlayerTeamColor();
         String playerTeamName = ClientUtils.getPlayerTeamName();
         if (playerTeamColor == null || playerTeamName == null ||
-                !th$allowedColors.contains(playerTeamColor.toLowerCase(Locale.ROOT)) ||
-                !th$allowedHearts.contains(texturePath)) {
+                !ClientUtils.heartAllowedColors.contains(playerTeamColor.toLowerCase(Locale.ROOT)) ||
+                !ClientUtils.heartAllowedHearts.contains(texturePath)) {
             //? if <= 1.21 {
             /*instance.blitSprite(identifier, x, y, u, v);
             *///?} else if <= 1.21.5 {
@@ -80,13 +69,13 @@ public class GuiMixin {
 
         String heartType = texturePath.replaceFirst("hud/heart/", "");
 
-        var customHeart = IdentifierHelper.mod("textures/gui/hearts/"+color+"_"+heartType+".png");
+        var customHeart = IdentifierHelper.mod(color+"_"+heartType);
         //? if <= 1.21 {
-        /*instance.blit(customHeart, x, y, 100, u, v, u, v, u, v);
+        /*instance.blitSprite(customHeart, x, y, u, v);
         *///?} else if <= 1.21.5 {
-        /*instance.blit(renderLayers, customHeart, x, y, u, v, u, v, u, v);
+        /*instance.blitSprite(renderLayers, customHeart, x, y, u, v);
         *///?} else {
-        instance.blit(renderPipeline, customHeart, x, y, u, v, u, v, u, v);
+        instance.blitSprite(renderPipeline, customHeart, x, y, u, v);
         //?}
     }
 }

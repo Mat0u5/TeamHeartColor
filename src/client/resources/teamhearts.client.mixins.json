@@ -2,8 +2,10 @@
 	"required": true,
 	"package": "net.mat0u5.teamhearts.mixin.client",
 	"compatibilityLevel": "${javaVersion}",
+	"plugin": "net.mat0u5.teamhearts.mixin.client.plugin.ClientMixinPlugin",
 	"client": [
-		"GuiMixin"
+		"GuiMixin",
+		"compat.appleskin.TextureHelperMixin"
 	],
 	"mixins": [
 	],

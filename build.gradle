@@ -15,6 +15,7 @@ base {
 }
 
 repositories {
+	maven { url "https://api.modrinth.com/maven" }
 	maven {
 		url = "https://www.cursemaven.com"
 		content {
@@ -41,6 +42,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	if (isValidVersion(project.carpet_mod_version)) modRuntimeOnly "curse.maven:carpet-349239:${project.carpet_mod_version}"
+	if (isValidVersion(project.appleskin_mod_version)) modCompileOnly "maven.modrinth:appleskin:${project.appleskin_mod_version}"
 }
 
 loom {

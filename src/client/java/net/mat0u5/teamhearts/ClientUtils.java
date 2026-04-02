@@ -5,7 +5,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.scores.Team;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class ClientUtils {
+    public static final List<String> heartAllowedColors = List.of(
+            "aqua","black","blue","dark_aqua","dark_blue","dark_gray","dark_green",
+            "dark_purple","dark_red","gold","gray","green","light_purple","white","yellow", "red"
+    );
+    public static final List<String> heartAllowedHearts = List.of(
+            "hud/heart/full", "hud/heart/full_blinking", "hud/heart/half", "hud/heart/half_blinking",
+            "hud/heart/hardcore_full", "hud/heart/hardcore_full_blinking", "hud/heart/hardcore_half", "hud/heart/hardcore_half_blinking"
+    );
 
     @Nullable
     public static String getPlayerTeamColor() {
