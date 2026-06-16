@@ -7,6 +7,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+//? if >= 26.2
+import net.minecraft.world.scores.TeamColor;
+
 public class ClientUtils {
     public static final List<String> heartAllowedColors = List.of(
             "aqua","black","blue","dark_aqua","dark_blue","dark_gray","dark_green",
@@ -22,7 +25,11 @@ public class ClientUtils {
         Minecraft client = Minecraft.getInstance();
         if (client.player == null) return null;
         Team team = client.player.getTeam();
-        if (team != null) return team.getColor().getName();
+        //? if <= 26.1 {
+        /*if (team != null) return team.getColor().getName();
+        *///?} else {
+        if (team != null) return team.getColor().orElse(TeamColor.WHITE).getSerializedName();
+        //?}
         return null;
     }
     @Nullable

@@ -29,7 +29,13 @@ import java.util.function.Function;
 //? if >= 1.21.6
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 
-@Mixin(value = Gui.class, priority = 1)
+//? if <= 26.1 {
+/*import net.minecraft.client.gui.Gui;
+@Mixin(value = Gui.class)
+*///?} else {
+import net.minecraft.client.gui.Hud;
+@Mixin(value = Hud.class, priority = 1)
+//?}
 public class GuiMixin {
 
     //? if <= 1.21 {
