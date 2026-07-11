@@ -1,10 +1,17 @@
 {
-	"required": true,
-	"package": "net.mat0u5.teamhearts.mixin",
-	"compatibilityLevel": "${javaVersion}",
-	"mixins": [
-	],
-	"injectors": {
-		"defaultRequire": 1
-	}
+  "package": "net.mat0u5.teamhearts.mixin",
+  "required": true,
+  "minVersion": "0.8",
+  "refmap": "${id}.mixins.refmap.json",
+  "plugin": "net.mat0u5.teamhearts.mixin.client.plugin.ClientMixinPlugin",
+  "compatibilityLevel": "${java}",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+  ],
+  "client": [
+    "GuiMixin",
+    "compat.appleskin.TextureHelperMixin"
+  ]
 }
