@@ -1,6 +1,10 @@
 package net.mat0u5.teamhearts;
 
+//? if forge && <= 1.16 {
+/*import net.minecraft.util.Identifier;
+*///?} else {
 import net.minecraft.resources.Identifier;
+//?}
 
 public class IdentifierHelper {
     //? if <= 1.20.5 {

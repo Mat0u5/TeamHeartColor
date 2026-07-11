@@ -136,7 +136,15 @@ dependencies {
 	if (stonecutter.eval(stonecutter.current.version, "<=1.14.4")) {
 		compileOnly("org.spongepowered:mixin:${libs.versions.mixin.get()}")
 	}
-	compileOnly("maven.modrinth:appleskin:2.5.1+mc1.20.1")
+	if (stonecutter.eval(stonecutter.current.version, "<=1.16")) {
+		compileOnly("maven.modrinth:appleskin:2.5.1+mc1.16.4")
+	}
+	else if (stonecutter.eval(stonecutter.current.version, "<=1.20")) {
+		compileOnly("maven.modrinth:appleskin:2.5.2+mc1.20.1")
+	}
+	else {
+		compileOnly("maven.modrinth:appleskin:2.5.1+mc1.20.2")
+	}
 }
 
 if (legacyForge) {

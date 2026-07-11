@@ -2,7 +2,11 @@ package net.mat0u5.teamhearts;
 
 
 import net.minecraft.client.Minecraft;
+//? if forge && <= 1.16 {
+/*import net.minecraft.scoreboard.Team;
+*///?} else {
 import net.minecraft.world.scores.Team;
+//?}
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -25,7 +29,9 @@ public class ClientUtils {
         Minecraft client = Minecraft.getInstance();
         if (client.player == null) return null;
         Team team = client.player.getTeam();
-        //? if <= 26.1 {
+        //? if forge && <= 1.15 {
+        /*if (team != null) return team.getColor().getFriendlyName();
+        *///?} else if <= 26.1 {
         /*if (team != null) return team.getColor().getName();
         *///?} else {
         if (team != null) return team.getColor().orElse(TeamColor.WHITE).getSerializedName();
