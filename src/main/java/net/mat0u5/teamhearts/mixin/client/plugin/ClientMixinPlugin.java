@@ -1,6 +1,6 @@
 package net.mat0u5.teamhearts.mixin.client.plugin;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.mat0u5.teamhearts.Main;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -13,7 +13,9 @@ public class ClientMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains("compat.appleskin")) {
-            return FabricLoader.getInstance().isModLoaded("appleskin");
+            boolean ret = Main.platform().isModLoaded("appleskin");
+            Main.LOGGER.info("[TeamHeartColor] Compat - Appleskin - " + ret);
+            return ret;
         }
         return true;
     }

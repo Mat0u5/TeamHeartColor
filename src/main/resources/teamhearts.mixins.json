@@ -11,7 +11,7 @@
   "mixins": [
   ],
   "client": [
-    "GuiMixin",
-    "compat.appleskin.TextureHelperMixin"
+    "client.GuiMixin",
+    "client.compat.appleskin.TextureHelperMixin"
   ]
 }
