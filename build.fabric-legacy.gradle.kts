@@ -60,7 +60,12 @@ dependencies {
 			officialMojangMappings()
 		})
 	modImplementation(libs.fabric.loader)
-	compileOnly("maven.modrinth:appleskin:3.0.6+mc1.21")
+	if (stonecutter.eval(stonecutter.current.version, "<=1.20")) {
+		compileOnly("maven.modrinth:appleskin:2.5.2+mc1.20.1")
+	}
+	else {
+		compileOnly("maven.modrinth:appleskin:3.0.6+mc1.21")
+	}
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
 }
 

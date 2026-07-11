@@ -1,5 +1,22 @@
 package net.mat0u5.teamhearts.mixin.client.compat.appleskin;
 
+//? if <= 1.20 {
+/*import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import squeek.appleskin.api.event.HUDOverlayEvent;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import squeek.appleskin.client.HUDOverlayHandler;
+@Pseudo
+@Mixin(value = HUDOverlayHandler.class, priority = 1, remap = false)
+public class TextureHelperMixin {
+	@WrapOperation(method = "onRender", at = @At(value = "FIELD", target = "Lsqueek/appleskin/api/event/HUDOverlayEvent$HealthRestored;isCanceled:Z"))
+	private boolean cancelHealthPreview(HUDOverlayEvent.HealthRestored instance, Operation<Boolean> original) {
+		return true;
+	}
+}
+/^//?} else {
 import net.mat0u5.teamhearts.ClientUtils;
 import net.mat0u5.teamhearts.IdentifierHelper;
 import net.minecraft.resources.Identifier;
@@ -32,3 +49,4 @@ public class TextureHelperMixin {
         cir.setReturnValue(customHeart);
     }
 }
+^/*///?}

@@ -136,7 +136,7 @@ dependencies {
 	if (stonecutter.eval(stonecutter.current.version, "<=1.14.4")) {
 		compileOnly("org.spongepowered:mixin:${libs.versions.mixin.get()}")
 	}
-	compileOnly("maven.modrinth:appleskin:2.5.1+mc1.20.2")
+	compileOnly("maven.modrinth:appleskin:2.5.1+mc1.20.1")
 }
 
 if (legacyForge) {
