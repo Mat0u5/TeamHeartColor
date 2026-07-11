@@ -34,7 +34,11 @@ public class ClientUtils {
         *///?} else if <= 26.1 {
         /*if (team != null) return team.getColor().getName();
         *///?} else {
-        if (team != null) return team.getColor().orElse(TeamColor.WHITE).getSerializedName();
+        if (team != null) {
+            var opt = team.getColor();
+            if (opt.isPresent()) return opt.get().getSerializedName();
+            return null;
+        }
         //?}
         return null;
     }

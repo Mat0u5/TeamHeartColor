@@ -12,7 +12,6 @@ public class ClientMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        System.out.println("shouldApplyMixin_"+mixinClassName);
 
         if (mixinClassName.contains("compat.appleskin")) {
             //? if <= 1.15 {
@@ -21,10 +20,8 @@ public class ClientMixinPlugin implements IMixinConfigPlugin {
             boolean ret = Main.platform().isModLoaded("appleskin");
             Main.LOGGER.info("[TeamHeartColor] Compat - Appleskin - " + ret);
             //?}
-            System.out.println("rett_"+ret+"\n\n");
             return ret;
         }
-        System.out.println("ret_true\n\n");
         return true;
     }
 

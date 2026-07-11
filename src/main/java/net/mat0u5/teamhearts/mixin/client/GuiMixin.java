@@ -99,7 +99,6 @@ public class GuiMixin {
             else texturePath += "full";
             if (isBlinking) texturePath += "_blinking";
         }
-        System.out.println("TEST_"+texturePath);
         *///?} else if <= 1.20 {
         /*String texturePath = "hud/heart/";
         boolean isHardcore = k > 0;
@@ -148,11 +147,9 @@ public class GuiMixin {
         ForgeIngameGui.blit(x, y, 0, 0, 9, 9, 9, 9);
         Minecraft.getInstance().getTextureManager().bindTexture(ForgeIngameGui.GUI_ICONS_LOCATION);
         *///?} else if forge && <= 1.16 {
-        /*System.out.println("blit.");
-        Minecraft.getInstance().getTextureManager().bind(customHeart);
+        /*Minecraft.getInstance().getTextureManager().bind(customHeart);
         ForgeIngameGui.blit(poseStack, x, y, 0, 0, 9, 9, 9, 9);
         Minecraft.getInstance().getTextureManager().bind(ForgeIngameGui.GUI_ICONS_LOCATION);
-        System.out.println("blit-after.");
         *///?} else if <= 1.15 {
         /*Minecraft.getInstance().getTextureManager().bind(customHeart);
         Gui.blit(x, y, 0, 0, 9, 9, 9, 9);
